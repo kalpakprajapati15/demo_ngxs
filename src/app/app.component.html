@@ -2,15 +2,16 @@
 
 <button (click)="addHouse()">Click to add house</button> -->
 
-<button (click)="fetchProducts()">Clcik To Fetch and add products</button>
-<button (click)="fetchProductsFast()">Clcik To Fetch fast</button>
+<p-button styleClass="p-button-success" (click)="fetchProducts()">Clcik To Fetch and add products</p-button>
+<p-button styleClass="p-button-success" (click)="addRandom()">Clcik To add random user</p-button>
+
 
 
 <p-toast></p-toast>
 
-<button (click)="addProduct()">Click to add a new product</button>
+<p-button styleClass="p-button-success" (click)="addProduct()">Click to add a new product</p-button>
 
-<p-table [value]="products$ | async" [tableStyle]="{ 'min-width': '50rem' }" [scrollHeight]="'500px'">
+<p-table [value]="products$ | async" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
         <tr>
             <th>Avatar</th>

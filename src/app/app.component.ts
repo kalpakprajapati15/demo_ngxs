@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Actions, Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { MessageService } from "primeng/api";
-import { AddUser, FetchUser, UserModel, UserState } from './store/users';
+import { AddRandomUser, AddUser, FetchUser, UserModel, UserState } from './store/users';
 
 
 @Component({
@@ -18,23 +18,8 @@ export class AppComponent implements OnInit {
   @Select(UserState)
   products$: Observable<UserModel[]>
   constructor(private store: Store, private actions$: Actions, private messageService: MessageService) {
-    // this.animals$ = this.store.select(state => state.zoo);
-    // this.animals$.subscribe(val => console.log(val))
-    // this.societyHouses$.subscribe(val => console.log(val))
 
   }
-
-  // ngOnInit(): void {
-  //   this.actions$.pipe(ofActionSuccessful(FeedAnimals)).subscribe(oval => console.log("action succes " + oval))
-  // }
-
-  // dispatchzoo() {
-  //   this.store.dispatch(new FeedAnimals(3));
-  // }
-
-  // addHouse() {
-  // this.store.dispatch(new AddHouse({ number: 1, owner: 'kalpak' }))
-  // }
   ngOnInit(): void {
 
   }
@@ -55,5 +40,11 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new FetchUser(1)).subscribe(val => {
       this.messageService.add({ severity: 'success', summary: 'succcess', detail: 'Users fetched successfully' })
     });
+  }
+
+  addRandom() {
+    this.store.dispatch(new AddRandomUser()).subscribe(val => {
+      this.messageService.add({ severity: 'success', summary: 'succcess', detail: 'Random user added successfully' })
+    })
   }
 }

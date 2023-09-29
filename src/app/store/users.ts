@@ -10,6 +10,10 @@ export class AddUser {
     }
 }
 
+export class AddRandomUser {
+    static readonly type = '[Products] AddRandomUser'
+}
+
 export class FetchUser {
     static readonly type = '[Products] FetchUser'
     constructor(public page: number) {
@@ -51,12 +55,24 @@ export class UserState {
         ])
     }
 
-    @Action(FetchUser, {cancelUncompleted: true})
+    @Action(FetchUser, { cancelUncompleted: true })
     fetchProduct(ctx: StateContext<UserModel[]>, action: FetchUser) {
-        return this.httpClient.get('https://reqres.in/api/users', { params: { 'page': action.page } },).pipe(delay(2000), tap((response: any) => {
+        return this.httpClient.get('https://reqres.in/api/users', { params: { 'page': action.page } }).pipe(delay(2000), tap((response: any) => {
             ctx.setState([
                 ...response.data
             ]);
         }));
+    }
+
+    @Action(AddRandomUser, { cancelUncompleted: true })
+    addRandomUser(ctx: StateContext<UserModel[]>) {
+        const randomNumber = Math.ceil((Math.random() * 5));
+        const url = `https://reqres.in/api/users/${randomNumber}`
+        return this.httpClient.get(url).pipe(tap((res: any) => {
+            ctx.setState([
+                ...ctx.getState(),
+                res.data
+            ])
+        }))
     }
 }

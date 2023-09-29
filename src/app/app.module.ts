@@ -10,6 +10,7 @@ import { ToastModule } from "primeng/toast";
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { UserState } from './store/users';
 import { MessageService } from "primeng/api";
+import { ButtonModule } from "primeng/button";
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     TableModule,
+    ButtonModule,
     ToastModule,
     BrowserAnimationsModule,
     NgxsModule.forRoot([ZooState, SocietyState, UserState]),
